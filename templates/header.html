@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top " role="navigation">
+        <div>
+            <ul class="nav navbar-nav" role="navigation">
+                <li><a href="#">Data Mining Online</a> </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 10px">
+                {% if user.is_authenticated %}
+                    <li>
+                    <div class="dropdown" style="margin-top: 8px">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">{{ user.username }}<span class="caret"></span> </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">修改密码</a> </li>
+                            <li><a href="#">个人信息</a> </li>
+                            <li><a href="#">后台管理</a> </li>
+                        </ul>
+                    </div>
+                    </li>
+                    <li><a href="#">退出</a> </li>
+                {% else %}
+                    <li><a href="#">登录</a> </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
