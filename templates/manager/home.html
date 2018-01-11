@@ -1,0 +1,64 @@
+{#<!DOCTYPE html>#}
+{#{% load staticfiles %}#}
+{#<html>#}
+{#<head>#}
+{#    <title>DMOnline - Home</title>#}
+{##}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0" />#}
+{##}
+{#    <!-- bootstrap -->#}
+{#    <link href="{% static 'css/bootstrap/bootstrap.css' %}" rel="stylesheet" />#}
+{#    <link href="{% static 'css/bootstrap/bootstrap-responsive.css' %}" rel="stylesheet" />#}
+{#    <link href="{% static 'css/bootstrap/bootstrap-overrides.css' %}" type="text/css" rel="stylesheet" />#}
+{##}
+{#    <!-- libraries -->#}
+{#    <link href="{% static 'css/lib/jquery-ui-1.10.2.custom.css' %}" rel="stylesheet" type="text/css" />#}
+{#    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">#}
+{##}
+{#    <!-- global styles -->#}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'css/layout.css' %}" />#}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'css/elements.css' %}" />#}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'css/icons.css' %}" />#}
+{##}
+{#    <!-- this page specific styles -->#}
+{#    <link rel="stylesheet" href="{% static 'css/compiled/web-app-icons.css' %}" type="text/css" media="screen" />#}
+{##}
+{#    <!-- open sans font -->#}
+{#    <link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />#}
+{##}
+{#    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#</head>#}
+{##}
+{#<body>#}
+{#    <!-- nav bar -->#}
+{#    {% include 'manager/navbar.html' %}#}
+{#    <!-- end bar -->#}
+{##}
+{#    <!-- sidebar -->#}
+{#    {% include 'manager/sidebar.html' %}#}
+{#    <!-- end sidebar-->#}
+{##}
+{#    <!-- content -->#}
+{##}
+{##}
+{#    <script src="{% static 'js/jquery-latest.js' %}"></script>#}
+{#    <script src="{% static 'js/bootstrap.min.js' %}"></script>#}
+{#    <script src="{% static 'js/theme.js'%}"></script>#}
+{##}
+{#</body>#}
+{#</html>#}
+{% extends "manager/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    DMOnline - home
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/jquery-latest.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/theme.js'%}"></script>
+{% endblock %}

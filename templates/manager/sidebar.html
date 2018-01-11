@@ -1,0 +1,52 @@
+<div id="sidebar-nav">
+        <ul id="dashboard-menu">
+            <li>
+                <a href="{% url 'manager:manager_home' %}">
+                    <i class="fa fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="chart-showcase.html">
+                    <i class="fa fa-signal"></i>
+                    <span>Charts</span>
+                </a>
+            </li>
+{#            <li>#}
+{#                <a class="dropdown-toggle" href="#">#}
+{#                    <i class="icon-group"></i>#}
+{#                    <span>Users</span>#}
+{#                    <i class="icon-chevron-down"></i>#}
+{#                </a>#}
+{#                <ul class="submenu">#}
+{#                    <li><a href="user-list.html">User list</a></li>#}
+{#                    <li><a href="new-user.html">New user form</a></li>#}
+{#                    <li><a href="user-profile.html">User profile</a></li>#}
+{#                </ul>#}
+{#            </li>#}
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-table"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span>My Info</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-share-alt"></i>
+                    <span>Extras</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="{% url 'manager:signin' %}">Sign in</a></li>
+                    <li><a href="{% url 'manager:signup' %}">Sign up</a></li>
+                </ul>
+            </li>
+        </ul>
+</div>
