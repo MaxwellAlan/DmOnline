@@ -1,10 +1,12 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-
+from django.contrib.auth.decorators import login_required
 from .forms import SigninForm,SignupForm
 from account.models import UserInfo
+from .models import MapPoi
+import json
 # Create your views here.
 def signin(request):
     if request.method == "POST":
@@ -14,14 +16,21 @@ def signin(request):
             user=authenticate(username=cd['username'],password=cd['password'])
             if user:
                 login(request,user)
-                return HttpResponse("welcome you. you have been authenticated successfully")
+                # return HttpResponse("welcome you. you have been authenticated successfully")
+                return HttpResponseRedirect(reverse("manager:manager_home"))
             else:
-                return HttpResponse("sorry.your username or password is not right")
+                # return HttpResponse("sorry.your username or password is not right")
+                return render(request, "manager/signin.html")
         else:
-            return HttpResponse("Invalid login")
+            return render(request, "manager/signin.html")
+            # return HttpResponse("Invalid login")
     if request.method == "GET":
         signin_form=SigninForm()
         return render(request, "manager/signin.html")
+
+def signout(request):
+    logout(request)
+    return render(request, "manager/signin.html")
 
 def signup(request):
     if request.method =="POST":
@@ -41,4 +50,17 @@ def signup(request):
         # return render(request,"account/register.html",{"form":user_form})
         return render(request,"manager/signup.html")
 
+@login_required(login_url="/manager/signin/")
+def manager_home(request):
+    return render(request,"manager/home.html",{"user":request.user})
+
+
+@login_required(login_url="/manager/signin/")
+def map(request):
+    coordinates=MapPoi.objects.values('id','longitude','latitude')
+    cor_list=[]
+    for i in range(len(coordinates)):
+        cor_list.append(coordinates[i])
+    cor_json=json.dumps(cor_list)
+    return render(request,"manager/map.html",{"cor_json":cor_json})
 

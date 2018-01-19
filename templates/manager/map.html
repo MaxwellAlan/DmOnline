@@ -13,31 +13,35 @@
     <div id="allmap" ></div>
     </body>
     <script type="text/javascript">
-
-    var points = [new BMap.Point(108.9535811,34.2657131),
-                  new BMap.Point(108.9535811,34.2657132),
-                  new BMap.Point(108.9535811,34.2657133),
-                  new BMap.Point(108.9535811,34.2657134),
-                  new BMap.Point(108.9535811,34.2657135)
-    ];
+    var allmappoi={{ cor_json|safe }};
 
     //地图初始化
-    var bm = new BMap.Map("allmap");
+    var bm = new BMap.Map("allmap",{});
     bm.centerAndZoom(new BMap.Point(108.953581,34.265713),15);
     bm.enableScrollWheelZoom(true);
-    //坐标转换完之后的回调函数
-    translateCallback = function (data){
-      if(data.status === 0) {
-        for (var i = 0; i < data.points.length; i++) {
-            bm.addOverlay(new BMap.Marker(data.points[i]));
-            bm.setCenter(data.points[i]);
+
+    if(document.createElement('canvas').getContext){
+        var points=[];
+        for(var i=0;i<allmappoi.length;i++){
+            points.push(new BMap.Point(allmappoi[i]['longitude'],allmappoi[i]['latitude']));
         }
-      }
+        var options = {
+            size: BMAP_POINT_SIZE_SMALL,
+            shape: BMAP_POINT_SHAPE_STAR,
+            color: '#d340c3'
+        }
+        var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
+        pointCollection.addEventListener('click', function (e) {
+          alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+        });
+        bm.addOverlay(pointCollection);  // 添加Overlay
+    }else {
+        alert("请在Chrome上查看");
     }
-    setTimeout(function(){
-        var convertor = new BMap.Convertor();
-        convertor.translate(points, 1, 5, translateCallback)
-    }, 1000);
+
+
+
+
     </script>
 
 {% endblock %}
