@@ -9,5 +9,6 @@ urlpatterns=[
     url(r'^home/$',views.manager_home,name="manager_home"),
     url(r'^signout/$',views.signout,name="sign_out"),
     url(r'^map/$',views.map,name="map"),
+    url(r'^tables/$',views.tables,name="tables"),
     # url(r'^logout/$',views.logout,name="user_logout"),
 ]

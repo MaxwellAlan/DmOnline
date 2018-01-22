@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'manager',
+    'django_pandas'
 ]
 
 MIDDLEWARE = [

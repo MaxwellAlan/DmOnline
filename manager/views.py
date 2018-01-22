@@ -64,3 +64,8 @@ def map(request):
     cor_json=json.dumps(cor_list)
     return render(request,"manager/map.html",{"cor_json":cor_json})
 
+@login_required(login_url="/manager/signin/")
+def tables(request):
+    return render(request,"manager/tables.html")
+
+
