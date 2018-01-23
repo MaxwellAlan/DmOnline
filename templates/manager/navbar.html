@@ -1,12 +1,12 @@
 {% load staticfiles %}
-<div class="navbar navbar-inverse">
+<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="{% url 'manager:manager_home' %}"><img src="{% static 'img/new_logo.png' %}" /></a>
+            <a style="margin-left: 10px" class="brand" href="{% url 'manager:manager_home' %}"><img src="{% static 'img/new_logo.png' %}" /></a>
 
             <ul class="nav pull-right">
 {#                <li class="hidden-phone">#}

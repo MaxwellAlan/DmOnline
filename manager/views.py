@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SigninForm,SignupForm
 from account.models import UserInfo
 from .models import MapPoi
+from django_pandas.io import read_frame
 import json
 # Create your views here.
 def signin(request):
@@ -66,6 +67,11 @@ def map(request):
 
 @login_required(login_url="/manager/signin/")
 def tables(request):
-    return render(request,"manager/tables.html")
+    # mapdata=MapPoi.objects.values('id','name_id','address','longitude','latitude')
+    mapdata=MapPoi.objects.all()
+    df=read_frame(mapdata)
+    basedata = df[['id','name_id','address','longitude','latitude']].head(20).to_html(classes="table table-striped table-hover table-bordered table-condensed",index=None)
+    poidata=df[['id','name_id','food','hotel','shopping','dailyservice','entertainment','education','medical','financial','traffic']].head(20).to_html(classes="table table-striped table-hover table-bordered table-condensed",index=None)
+    return render(request,"manager/tables.html",{"datatable":basedata,"poidatatable":poidata})
 
 
