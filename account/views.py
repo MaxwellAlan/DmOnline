@@ -23,6 +23,7 @@ def register(request):
     else:
         user_form=RegisterForm()
         return render(request,"account/register.html",{"form":user_form})
+        # return render(request,"starter-template.html")
 
 def user_login(request):
     if request.method == "POST":

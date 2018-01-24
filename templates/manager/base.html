@@ -29,7 +29,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
-<body>
+<body style="background-color: #f7f7f7">
 <!-- nav bar -->
     {% include 'manager/navbar.html' %}
     <!-- end bar -->
@@ -47,35 +47,7 @@
     <script src="{% static 'js/jquery-latest.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/theme.js'%}"></script>
-    <script type="text/javascript">
-    window.onload = function(){
-    var $ = function(id){
-        return document.getElementById(id);
-    }
 
-    var addEvent = function(obj, event, fn){
-        if(obj.addEventListener){
-            obj.addEventListener(event,fn,false);
-        }else if(obj.attachEvent){
-            obj.attachEvent('on'+event,fn);
-        }
-
-    }
-
-    var domSider = $('sidebar-nav');
-    addEvent(window,'scroll', function(){
-        var sideHeight = domSider.offsetHeight;
-        var screenHeight = document.documentElement.clientHeight;
-        var scrollHeight = document.body.scrollTop;
-        if(scrollHeight+screenHeight > sideHeight){
-            domSider.style.cssText='position:fixed;' +
-                'right:0px;top:'+(-(sideHeight-screenHeight))+'px';
-        }else{
-            domSider.style.position='static';
-        }
-    });
-}
-    </script>
 {% endblock %}
 
 </body>
