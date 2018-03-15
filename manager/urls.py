@@ -10,5 +10,6 @@ urlpatterns=[
     url(r'^signout/$',views.signout,name="sign_out"),
     url(r'^map/$',views.map,name="map"),
     url(r'^tables/$',views.tables,name="tables"),
+    url(r'^maptest/$',views.map_test,name="map_test"),
     # url(r'^logout/$',views.logout,name="user_logout"),
 ]

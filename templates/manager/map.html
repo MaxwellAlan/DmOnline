@@ -26,8 +26,8 @@
             points.push(new BMap.Point(allmappoi[i]['longitude'],allmappoi[i]['latitude']));
         }
         var options = {
-            size: BMAP_POINT_SIZE_SMALL,
-            shape: BMAP_POINT_SHAPE_STAR,
+            size: BMAP_POINT_SIZE_SMALLER,
+            shape: BMAP_POINT_SHAPE_CIRCLE,
             color: '#d340c3'
         }
         var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection

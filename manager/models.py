@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-import json
 
 # Create your models here.
 class MapPoi(models.Model):
@@ -20,9 +19,11 @@ class MapPoi(models.Model):
     medical=models.IntegerField(blank=False)
     financial=models.IntegerField(blank=False)
     traffic=models.IntegerField(blank=False)
+    score=models.IntegerField(blank=False)
 
     def __str__(self):
         return "name id is:{0},longitude:{1},latitude:{2}".format(self.name_id,self.longitude,self.latitude)
 
     def to_json(self):
-        return {"id":self.id,"longitude":self.longitude,"latitude":self.latitude}
+        return {"id":self.id,"longitude":self.longitude,"latitude":self.latitude,"score":self.score}
+

@@ -75,3 +75,10 @@ def tables(request):
     return render(request,"manager/tables.html",{"datatable":basedata,"poidatatable":poidata})
 
 
+def map_test(request):
+    coordinates = MapPoi.objects.values('id', 'longitude', 'latitude','score')
+    cor_list = []
+    for i in range(len(coordinates)):
+        cor_list.append(coordinates[i])
+    cor_json = json.dumps(cor_list)
+    return render(request,"manager/map_test.html",context={"cor_json":cor_json})
