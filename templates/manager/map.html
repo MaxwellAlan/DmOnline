@@ -1,47 +1,100 @@
 {% extends 'manager/base.html' %}
-
+{% load staticfiles %}
 {% block title %}
     DMOnline - map
 {% endblock %}
 
 {% block content %}
     <style type="text/css">
-        #allmap {width: 85%;height: 800px;overflow: hidden;margin-left: 185px;margin-top:40px;font-family:"微软雅黑";}
+        html,body {
+            width: 100%;
+            height: 100%;
+            {#margin: 0;#}
+            padding: 5px;
+            overflow: hidden;
+        }
+        #map {
+            width: 85%;
+            height: 85%;
+            overflow: hidden;
+            margin-left: 185px;
+            margin-top:45px;
+        }
+        {#allmap {width: 85%;height: 800px;overflow: hidden;margin-left: 185px;margin-top:40px;font-family:"微软雅黑";}#}
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=n19zGiKvK7S8Bu0H44rhVtSL4q4eeMXh"></script>
     <body>
-    <div id="allmap" ></div>
+    <div id="map" ></div>
+    <canvas id="canvas"></canvas>
     </body>
+{#    <div id="map"></div>#}
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=n19zGiKvK7S8Bu0H44rhVtSL4q4eeMXh"></script>
+    <script type="text/javascript" src="{% static 'js/mapv.min.js' %}"></script>
+
     <script type="text/javascript">
-    var allmappoi={{ cor_json|safe }};
+        var allmappoi={{ cor_json|safe }};
 
-    //地图初始化
-    var bm = new BMap.Map("allmap",{});
-    bm.centerAndZoom(new BMap.Point(108.953581,34.265713),15);
-    bm.enableScrollWheelZoom(true);
-
-    if(document.createElement('canvas').getContext){
-        var points=[];
-        for(var i=0;i<allmappoi.length;i++){
-            points.push(new BMap.Point(allmappoi[i]['longitude'],allmappoi[i]['latitude']));
-        }
-        var options = {
-            size: BMAP_POINT_SIZE_SMALLER,
-            shape: BMAP_POINT_SHAPE_CIRCLE,
-            color: '#d340c3'
-        }
-        var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
-        pointCollection.addEventListener('click', function (e) {
-          alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+        var map = new BMap.Map("map",{
+            enableMapClick:false
         });
-        bm.addOverlay(pointCollection);  // 添加Overlay
-    }else {
-        alert("请在Chrome上查看");
-    }
+        map.centerAndZoom(new BMap.Point(108.953581,34.265713),15);
+        map.enableScrollWheelZoom(true);
+
+        var data = [];
 
 
+        for(var i=0;i<allmappoi.length;i++) {
+            data.push({
+                geometry: {
+                    type: 'Point',
+                    coordinates: [allmappoi[i]['longitude'], allmappoi[i]['latitude']]
+                },
+                count: allmappoi[i]['score']/50
+            });
+        }
 
+        var dataSet = new mapv.DataSet(data);
+
+        var options = {
+            fillStyle: 'rgba(255, 50, 50, 0.6)',
+            maxSize: 20,
+            max: 30,
+            draw: 'bubble'
+        }
+
+        var mapvLayer = new mapv.baiduMapLayer(map, dataSet, options);
 
     </script>
+{#    <script type="text/javascript">#}
+{#    var allmappoi={{ cor_json|safe }};#}
+{##}
+{#    //地图初始化#}
+{#    var bm = new BMap.Map("allmap",{});#}
+{#    bm.centerAndZoom(new BMap.Point(108.953581,34.265713),15);#}
+{#    bm.enableScrollWheelZoom(true);#}
+{##}
+{#    if(document.createElement('canvas').getContext){#}
+{#        var points=[];#}
+{#        for(var i=0;i<allmappoi.length;i++){#}
+{#            points.push(new BMap.Point(allmappoi[i]['longitude'],allmappoi[i]['latitude']));#}
+{#        }#}
+{#        var options = {#}
+{#            size: BMAP_POINT_SIZE_SMALLER,#}
+{#            shape: BMAP_POINT_SHAPE_CIRCLE,#}
+{#            color: '#d340c3'#}
+{#        }#}
+{#        var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection#}
+{#        pointCollection.addEventListener('click', function (e) {#}
+{#          alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件#}
+{#        });#}
+{#        bm.addOverlay(pointCollection);  // 添加Overlay#}
+{#    }else {#}
+{#        alert("请在Chrome上查看");#}
+{#    }#}
+{##}
+{##}
+{##}
+{##}
+{#    </script>#}
 
 {% endblock %}

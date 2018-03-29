@@ -57,13 +57,20 @@ def manager_home(request):
 
 
 @login_required(login_url="/manager/signin/")
+# def map(request):
+#     coordinates=MapPoi.objects.values('id','longitude','latitude')
+#     cor_list=[]
+#     for i in range(len(coordinates)):
+#         cor_list.append(coordinates[i])
+#     cor_json=json.dumps(cor_list)
+#     return render(request,"manager/map.html",{"cor_json":cor_json})
 def map(request):
-    coordinates=MapPoi.objects.values('id','longitude','latitude')
-    cor_list=[]
+    coordinates = MapPoi.objects.values('id', 'longitude', 'latitude', 'score')
+    cor_list = []
     for i in range(len(coordinates)):
         cor_list.append(coordinates[i])
-    cor_json=json.dumps(cor_list)
-    return render(request,"manager/map.html",{"cor_json":cor_json})
+    cor_json = json.dumps(cor_list)
+    return render(request, "manager/map.html", context={"cor_json": cor_json})
 
 @login_required(login_url="/manager/signin/")
 def tables(request):
