@@ -27,3 +27,4 @@ class MapPoi(models.Model):
     def to_json(self):
         return {"id":self.id,"longitude":self.longitude,"latitude":self.latitude,"score":self.score}
 
+# class Dealer(models.Model):
